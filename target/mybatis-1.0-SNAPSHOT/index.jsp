@@ -5,8 +5,9 @@
   Time: 15:35
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -34,6 +35,7 @@
                 <h1>Mybatis基础入门课程！</h1>
                 <p>通过一个项目来完成基础部分的学习</p>
                 <p><a class="btn btn-primary btn-lg" href="#" role="button">查看更多，请上慕课网</a></p>
+                <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/add.jsp" role="button">新增用户</a></p>
             </div>
         </div>
         <div class="row">
@@ -51,11 +53,12 @@
                 <c:forEach var="user" items="${userlist}">
                     <tr>
                         <td>${user.id}</td>
-                        <td>${user.username}</td>
+                        <%--<td>${user.username}</td>--%>
+                        <td>${user.name}</td>
                         <td>${user.nickname}</td>
                         <td>${user.email}</td>
                         <td>${user.phone}</td>
-                        <td>${user.createTime}</td>
+                        <td><fmt:formatDate value="${user.createTime}" type="date" pattern="yyyy-MM-dd"></fmt:formatDate> </td>
                         <c:if test="${user.userStatus == 0}">
                             <td>正常</td>
                         </c:if>
@@ -66,7 +69,7 @@
                             <td>删除</td>
                         </c:if>
                         <td>
-                            <a href="">查看</a>
+                            <a href="${pageContext.request.contextPath}/detail?id=${user.id}">查看</a>
                             <a href="">修改</a>
                             <a href="">删除</a>
                         </td>

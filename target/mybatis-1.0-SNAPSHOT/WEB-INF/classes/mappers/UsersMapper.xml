@@ -7,8 +7,45 @@
     通过命名空间找到我们的实体类
 -->
 <mapper namespace="com.neisun.entity.Users">
-    <select id="findAll"
-            resultType="com.neisun.entity.Users">
+    <!--<select id="findUser"-->
+            <!--resultType="com.neisun.entity.Users">-->
+        <!--select * from users-->
+        <!--<if test="id != null">-->
+            <!--where id = #{id}-->
+        <!--</if>-->
+    <!--</select>-->
+    <!--
+        如果配置了map属性，我们需要在这里配置上resultMap属性
+    -->
+    <select id="findUser"
+            resultMap="userMap">
         select * from users
+        <if test="id != null">
+            where id = #{id}
+        </if>
     </select>
+    <!--可以利用动态sql的形式去写-->
+    <!--<select id="findById"-->
+            <!--resultType="com.neisun.entity.Users">-->
+        <!--select * from users where id = #{id}-->
+    <!--</select>-->
+    <!--
+        自定义的map，有可能因为字段
+    -->
+    <resultMap id="userMap" type="com.neisun.entity.Users">
+        <result column="username" property="name"></result>
+    </resultMap>
+    <!--
+        插入数据
+        id一个标识，可以让dao层中找到对应的sql操作
+        useGeneratedKeys 自动生成主键
+        keyProperty,keyColumn 主键
+    -->
+    <insert id="addUser"
+            useGeneratedKeys="true"
+            parameterType="com.neisun.entity.Users"
+            keyProperty="id">
+        insert into users(username,userpass,nickname,age,gender,phone,email,createTime,updateTime,lastLogin,userStatus,remark)
+        values (#{name},#{userpass},#{nickname},#{age},#{gender},#{phone},#{email},#{createTime},#{updateTime},#{lastLogin},#{userStatus},#{remark})
+    </insert>
 </mapper>

@@ -8,7 +8,25 @@ import java.util.Date;
  */
 public class Users {
     private int id;//用户编号
-    private String username; // 用户账号
+
+    public Users(String name, String userpass, String nickname, int age, String gender, String phone, String email, Date createTime, Date updateTime, Date lastLogin, int userStatus, String remark) {
+//        this.id = id;
+        this.name = name;
+        this.userpass = userpass;
+        this.nickname = nickname;
+        this.age = age;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.lastLogin = lastLogin;
+        this.userStatus = userStatus;
+        this.remark = remark;
+    }
+
+    //    private String username; // 用户账号
+    private String name; // 故意修改成 name ，用来尝试mybatis的映射
     private String userpass; // 用户密码
     private String nickname; // 用户昵称
     private int age; // 用户年龄
@@ -16,11 +34,19 @@ public class Users {
     private String phone; // 用户联系方式
     private String email; // 用户邮箱
 
+    public Users() {
+
+    }
+
+    public Users(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + name + '\'' +
                 ", userpass='" + userpass + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", age=" + age +
@@ -43,13 +69,13 @@ public class Users {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
+//    public String getUsername() {
+//        return username;
+//    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
 
     public String getUserpass() {
         return userpass;
@@ -81,6 +107,14 @@ public class Users {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {
